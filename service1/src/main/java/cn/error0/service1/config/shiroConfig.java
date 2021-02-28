@@ -2,7 +2,6 @@ package cn.error0.service1.config;
 
 
 import cn.error0.common.shiro.MyShiroRealm;
-import cn.error0.service1.SSOfilter;
 import cn.error0.common.shiro.RedisSessionDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
@@ -19,24 +18,18 @@ import java.util.Map;
 @Configuration
 public class shiroConfig {
 
-    @Bean
-    SSOfilter SSOfilter()
-    {
-        return new SSOfilter();
-    }
+
 
     @Bean
-    ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager SecurityManager,SSOfilter SSOfilter)
+    ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager SecurityManager)
     {
         ShiroFilterFactoryBean ShiroFilterFactoryBean=new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         Map<String, Filter> filtersMap = new LinkedHashMap <String, Filter>();
         ShiroFilterFactoryBean.setLoginUrl("http://127.0.0.1:8081/login");
         ShiroFilterFactoryBean.setSecurityManager(SecurityManager);
-        filterChainDefinitionMap.put("/","authc");
-        filterChainDefinitionMap.put("/**","sso");
+        filterChainDefinitionMap.put("/**","authc");
         ShiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        filtersMap.put("sso",SSOfilter);
         ShiroFilterFactoryBean.setFilters(filtersMap);
         return ShiroFilterFactoryBean;
     }

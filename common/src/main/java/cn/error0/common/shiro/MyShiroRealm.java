@@ -15,7 +15,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Set<String> roles =new HashSet<>();
-        roles.add("sso");
+        roles.add("authc");
         authorizationInfo.addRoles(roles);
         return authorizationInfo;
     }

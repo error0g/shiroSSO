@@ -12,25 +12,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
 
+    @RequestMapping("/login")
+    @ResponseBody
+    public String login(String username, String password) {
 
-        @RequestMapping("/login")
-        @ResponseBody
-        public String login(String username, String password) {
+        if (username == null || password == null)
+            return "请填写登录账号密码";
 
-            if(username==null||password==null)
-                return "请填写登录账号密码";
-
-            String result="ok";
-            UsernamePasswordToken  UsernamePasswordToken=new UsernamePasswordToken(username,password);
-           try {
-               SecurityUtils.getSubject().login(UsernamePasswordToken);
-           }catch (UnknownAccountException u)
-           {
-               result="登录失败！";
-               return result;
-           }
+        String result = "ok";
+        UsernamePasswordToken UsernamePasswordToken = new UsernamePasswordToken(username, password);
+        try {
+            SecurityUtils.getSubject().login(UsernamePasswordToken);
+        } catch (UnknownAccountException u) {
+            result = "登录失败！";
             return result;
         }
+        return result;
+    }
 
     @RequestMapping("/logout")
     @ResponseBody
