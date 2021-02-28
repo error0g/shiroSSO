@@ -13,27 +13,24 @@ public class LoginController {
 
 
 
-    @RequestMapping("/login")
-    @ResponseBody
-    public String login(String username, String password) {
+        @RequestMapping("/login")
+        @ResponseBody
+        public String login(String username, String password) {
 
-        if(username==null||password==null)
-            return "请填写登录账号密码";
+            if(username==null||password==null)
+                return "请填写登录账号密码";
 
-        String result="ok";
-        System.out.println(username+" "+password);
-        UsernamePasswordToken  UsernamePasswordToken=new UsernamePasswordToken(username,password);
-        SecurityUtils.getSubject().getSession().setAttribute("token",UsernamePasswordToken);
-       try {
-           SecurityUtils.getSubject().login(UsernamePasswordToken);
-       }catch (UnknownAccountException u)
-       {
-           result="登录失败！";
-           return result;
-       }
-       System.out.println( SecurityUtils.getSubject().getSession().getId());
-        return result;
-    }
+            String result="ok";
+            UsernamePasswordToken  UsernamePasswordToken=new UsernamePasswordToken(username,password);
+           try {
+               SecurityUtils.getSubject().login(UsernamePasswordToken);
+           }catch (UnknownAccountException u)
+           {
+               result="登录失败！";
+               return result;
+           }
+            return result;
+        }
 
     @RequestMapping("/logout")
     @ResponseBody
