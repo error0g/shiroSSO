@@ -1,6 +1,6 @@
 # shiro+redis 实现单点登录
 
-> 相关查阅文章请转移www.error0.cn 😜
+> 查阅相关文章请转移www.error0.cn 😜
 
 
 
